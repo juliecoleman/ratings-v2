@@ -2,10 +2,12 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
+
 from model import connect_to_db
 import crud
 
 from jinja2 import StrictUndefined
+
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -15,6 +17,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View homepage."""
+
 
     return render_template('homepage.html')
 
@@ -68,7 +71,7 @@ def login_user():
     user = crud.get_user_by_email(email)
 
     if password_to_check == user.password:
-        session['current_user'] = user.user_id
+        session['user_id'] = user.user_id
         flash('Logged In!')
     else:
         flash('Error.')

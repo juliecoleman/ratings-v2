@@ -10,6 +10,7 @@
     <li><a href="/users">View all users</a></li>
   </ul>
 
+  {% if 'user_id' not in session %}
   <h2>Create an Account</h2>
   <form action="/users" method="POST">
     <p>
@@ -24,7 +25,7 @@
     </p>
   </form>
 
-    <h2>Log In</h2>
+  <h2>Log In</h2>
   <form action="/login" method="POST">
     <p>
       Email <input type="text" name="email">
@@ -38,4 +39,5 @@
       <input type="submit">
     </p>
   </form>
+  {% endif %}
 {% endblock %}
