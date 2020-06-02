@@ -42,6 +42,39 @@ def all_users():
 
     return render_template('all_users.html', users=users)
 
+@app.route('/users', methods=['POST'])
+def register_user():
+    """Create a new user."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+    if user:
+        flash('Cannot create an account with that email. Try again.')
+    else:
+        crud.create_user(email, password)
+        flash('Account created! Please log in.')
+
+    return redirect('/')
+
+@app.route('/login', methods=['POST'])
+def login_user():
+    """Log in user."""
+
+    email = request.form.get('email')
+    password_to_check = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if password_to_check == user.password:
+        session['current_user'] = user.user_id
+        flash('Logged In!')
+    else:
+        flash('Error.')
+
+    return redirect('/')
+
 @app.route('/users/<user_id>')
 def show_user(user_id):
     """Show details on a particular movie."""
