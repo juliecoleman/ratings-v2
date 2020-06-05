@@ -39,7 +39,7 @@ def show_movie(movie_id):
 
 @app.route('/users')
 def all_users():
-    """View all movies."""
+    """View all users."""
 
     users = crud.all_users()
 
@@ -80,7 +80,7 @@ def login_user():
 
 @app.route('/users/<user_id>')
 def show_user(user_id):
-    """Show details on a particular movie."""
+    """Show details on a particular user."""
 
     user = crud.get_user_by_id(user_id)
 
